@@ -17,6 +17,22 @@
         </select>
     </div>
 
+    <p>Place your CSV Below </p>
+    
+    <textarea id="csv">Zip Code,Count
+"10002", 201
+"10003", 409
+"10016", 440
+"11211", 302
+"10009", 567
+"10014", 373</textarea>
+    </br>
+
+    <button id="conversion"> Turn Into JSON</button>
+
+    <textarea rows="50" cols="50" id="json">
+    </textarea>
+
 	<div class="menu">
 		<select id="colorSelector" style="" ='right'>
 			<option value="" disabled="disabled" selected="selected">Change color</option>
@@ -64,6 +80,7 @@
 <script src="{{ url_for('static', filename='heatNYC.js') }}"></script>
 <script src="{{ url_for('static', filename='graffitiNYC.js') }}"></script>
 <script src="{{ url_for('static', filename='maps.js') }}"></script>
+<script src="{{ url_for('static', filename='csvToJson.js') }}"></script>
 <!-- <script src="{{ url_for('static', filename='time.js') }}"></script> -->
 <!-- <script src="{{ url_for('static', filename='charts.js') }}"></script> -->
 
