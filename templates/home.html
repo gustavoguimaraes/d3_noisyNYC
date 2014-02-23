@@ -1,19 +1,46 @@
 {% extends "layout.html" %}
 {% block content %}
-   
+<style>
+    #tooltip {
+        position: absolute;
+        width: 200px;
+        height: auto;
+        padding: 10px;
+        background-color: white;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        pointer-events: none;
+    }
+
+    #tooltip.hidden {
+            display: none;
+    }
+
+    #tooltip p {
+            margin: 0;
+            font-family: sans-serif;
+            font-size: 16px;
+            line-height: 20px;
+    }
+
+</style>
 <div id="d3_map"></div> 	
 
 <div id="corner_item">
+
 	<div class="mapText"> NYC 311 Data</div>
 	<p class="mapSubtext">Zip codes with the most _____ complaints</p>
 
     <div class="menu">
-		<select id="dataSelector" style="" ='right'>
+		<select id="dataSelector">
 			<option value="" disabled="disabled">Change Data</option>
             <option value="noise" selected="selected">Noise</option>
             <option value="heat">Heating</option>
             <option value="graffiti">Graffiti</option>
-
         </select>
     </div>
 
@@ -34,7 +61,7 @@
     </textarea>
 
 	<div class="menu">
-		<select id="colorSelector" style="" ='right'>
+		<select id="colorSelector">
 			<option value="" disabled="disabled" selected="selected">Change color</option>
             <option value="YlGn">YlGn</option>
             <option value="YlGnBu">YlGnBu</option>
@@ -55,33 +82,55 @@
             <option value="Reds">Reds</option>
             <option value="Greys">Greys</option>
         </select>
+        <br>
     </div>
 
-	<p class="mapSubtext"><a href="https://github.com/zunayed/noisyNYC">Github</a> 
-	<br />
-	Zunayed Morsalin
-	<br />
-	Scroll to zoom in and out
+    <div class="slider">
+        <h2>Slider Example</h2>
+        <input type="range" min="0" max="100" value="0" step="1" onChange="sliderChange(this.value)" />
+        <br /><br />
+        Slider Value = <span id="sliderStatus">0</span>
+    </div>
+
+	<p class="mapSubtext">
+        <a href="#test" data-reveal-id="myModal" class="radius button tiny">Time of Day Viz</a>
+        <br />
+        <a href="https://github.com/zunayed/noisyNYC">Github</a> 
+    	<br />
+    	Zunayed Morsalin
+    	<br />
+    	Scroll to zoom in and out
+        <br />
+
+        <div id="myModal" class="reveal-modal" class="tiny" data-reveal>
+            <p id="modalHeader">Time Series Data</p>
+            <div id="chart"></div>     
+        </div>
 
 	</p>
 </div>
-<a id="infoBox" style="display: inline;">On Zip: </a>
-  
-<!-- <div class="row">
-  <div class="large-12 columns Greens">
-    	<div id="chart"></div> 	
-    	<div id="d3_chart"></div>
-  </div>
-</div> -->
+<a id="infoBox" style="display: inline;">
+    On Zip: 
+</a>
+
+<div id="tooltip" class="hidden">
+        <p><strong>Important Label Heading</strong></p>
+        <p><span id="value">100</span>%</p>
+</div>
+
+
+
 
 <!-- JavaScript -->
+
 <script src="{{ url_for('static', filename='d3.v3.js') }}"></script>
 <script src="{{ url_for('static', filename='noiseNYC.js') }}"></script>
 <script src="{{ url_for('static', filename='heatNYC.js') }}"></script>
 <script src="{{ url_for('static', filename='graffitiNYC.js') }}"></script>
 <script src="{{ url_for('static', filename='maps.js') }}"></script>
 <script src="{{ url_for('static', filename='csvToJson.js') }}"></script>
-<!-- <script src="{{ url_for('static', filename='time.js') }}"></script> -->
+<script src="{{ url_for('static', filename='slider.js') }}"></script>
+<script src="{{ url_for('static', filename='time.js') }}"></script>
 <!-- <script src="{{ url_for('static', filename='charts.js') }}"></script> -->
 
 {% endblock %}
